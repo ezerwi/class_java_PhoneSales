@@ -1,0 +1,39 @@
+package com.wjh.static_ex;
+
+public class InfoClass {
+
+	public static String gNote = "갤럭시노트8";
+	public static String v30 = "V30";
+	public static String iPhone = "iPhone8";
+	public static int price_g, price_v, price_i;
+
+	public String phoneName;
+	public String phoneEA;
+	public String storeName;
+	public int phonePrice;
+	public int ea;
+	public double disRate;
+
+	public InfoClass() {
+
+	}
+
+	public InfoClass(String n, int p) {
+		this.phoneName = n;
+		this.phonePrice = p;
+	}
+
+	public InfoClass(String n, String s, String p) {
+		this.phoneName = n;
+		this.storeName = s;
+		this.phoneEA = p;
+	}
+
+	public InfoClass(String n, String s, int e, int p) {
+		this.phoneName = n;
+		this.storeName = s;
+		this.ea = e;
+		this.phonePrice = p;
+	}
+
+}
