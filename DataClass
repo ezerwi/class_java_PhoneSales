@@ -1,0 +1,184 @@
+package com.wjh.static_ex;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class DataClass extends InfoClass {
+
+	static InfoClass ic[] = new InfoClass[3];
+	ArrayList<InfoClass> emart = new ArrayList<InfoClass>();
+	ArrayList<InfoClass> himart = new ArrayList<InfoClass>();
+	ArrayList<InfoClass> lottemart = new ArrayList<InfoClass>();
+
+	public DataClass() {
+
+		ic[0] = new InfoClass("갤럭시노트8", 1050000);
+		ic[1] = new InfoClass("V30", 925000);
+		ic[2] = new InfoClass("iPhone8", 1105000);
+
+		this.emart.add(new InfoClass("갤럭시노트8", "이대점", "13EA"));
+		this.emart.add(new InfoClass("갤럭시노트8", "강남점", "30EA"));
+		this.emart.add(new InfoClass("갤럭시노트8", "부산점", "45EA"));
+		this.emart.add(new InfoClass("V30", "이대점", "16EA"));
+		this.emart.add(new InfoClass("V30", "강남점", "32EA"));
+		this.emart.add(new InfoClass("V30", "부산점", "56EA"));
+		this.emart.add(new InfoClass("iPhone8", "이대점", "57EA"));
+		this.emart.add(new InfoClass("iPhone8", "강남점", "24EA"));
+		this.emart.add(new InfoClass("iPhone8", "부산점", "34EA"));
+
+		this.himart.add(new InfoClass("갤럭시노트8", "이대점", "32EA"));
+		this.himart.add(new InfoClass("갤럭시노트8", "강남점", "30EA"));
+		this.himart.add(new InfoClass("갤럭시노트8", "부산점", "35EA"));
+		this.himart.add(new InfoClass("V30", "이대점", "64EA"));
+		this.himart.add(new InfoClass("V30", "강남점", "23EA"));
+		this.himart.add(new InfoClass("V30", "부산점", "76EA"));
+		this.himart.add(new InfoClass("iPhone8", "이대점", "45EA"));
+		this.himart.add(new InfoClass("iPhone8", "강남점", "35EA"));
+		this.himart.add(new InfoClass("iPhone8", "부산점", "45EA"));
+
+		this.lottemart.add(new InfoClass("갤럭시노트8", "이대점", "78EA"));
+		this.lottemart.add(new InfoClass("갤럭시노트8", "강남점", "322EA"));
+		this.lottemart.add(new InfoClass("갤럭시노트8", "부산점", "123EA"));
+		this.lottemart.add(new InfoClass("V30", "이대점", "43EA"));
+		this.lottemart.add(new InfoClass("V30", "강남점", "22EA"));
+		this.lottemart.add(new InfoClass("V30", "부산점", "34EA"));
+		this.lottemart.add(new InfoClass("iPhone8", "이대점", "22EA"));
+		this.lottemart.add(new InfoClass("iPhone8", "강남점", "65EA"));
+		this.lottemart.add(new InfoClass("iPhone8", "부산점", "45EA"));
+	}
+
+	// 마트별 할인판매가 return method
+	public double discount(String m) {
+		if (m.equals("emart")) {
+			disRate = 10 * 0.01;
+		} else if (m.equals("himart")) {
+			disRate = 13 * 0.01;
+		} else if (m.equals("lottemart")) {
+			disRate = 15 * 0.01;
+		}
+		return disRate;
+	}
+
+	// ea에서 숫자만 분리해서 return
+	public int getEA(String s) {
+		int ea = 0;
+		String x[] = s.split("EA");
+		ea = Integer.parseInt(x[0]);
+		return ea;
+	}
+
+	// 마트별 기종별 매출 합
+
+	public void martsumEA() {
+		int sum[] = new int[3];
+
+		System.out.println("원하는 mart를 입력하세요");
+
+		Scanner x = new Scanner(System.in);
+		String name = x.nextLine();
+		String phoneName[] = { gNote, v30, iPhone };
+		ArrayList<InfoClass> dataArr = new ArrayList<InfoClass>();
+
+		if (name.equals("emart")) {
+			dataArr = this.emart;
+			disRate = 10 * 0.01;
+		} else if (name.equals("himart")) {
+			dataArr = this.himart;
+			disRate = 13 * 0.01;
+		} else if (name.equals("lottemart")) {
+			dataArr = this.lottemart;
+			disRate = 15 * 0.01;
+		} else
+			System.out.println("Error!");
+
+		for (int i = 0; i < dataArr.size(); i++) {
+			if (dataArr.get(i).phoneName.equals(gNote)) {
+				sum[0] += (getEA(dataArr.get(i).phoneEA)) * (ic[0].phonePrice) * (1.00 - disRate);
+			} else if (dataArr.get(i).phoneName.equals(v30)) {
+				sum[1] += (getEA(dataArr.get(i).phoneEA)) * (ic[1].phonePrice) * (1.00 - disRate);
+			} else if (dataArr.get(i).phoneName.equals(iPhone)) {
+				sum[2] += (getEA(dataArr.get(i).phoneEA)) * (ic[2].phonePrice) * (1.00 - disRate);
+			}
+		}
+
+		System.out.println(name + "에서 판매된 ");
+		for (int i = 0; i < 3; i++) {
+			System.out.println(phoneName[i] + "의 총 매출은 " + sum[i] + " 원 입니다.");
+		}
+	}
+
+	// 그냥 마트별 매출 합 method
+	public void sumEA() {
+		int sum = 0;
+
+		System.out.println("\n\n원하는 mart를 입력하세요");
+
+		Scanner x = new Scanner(System.in);
+		String name = x.nextLine();
+		ArrayList<InfoClass> dataArr = new ArrayList<InfoClass>();
+
+		if (name.equals("emart")) {
+			dataArr = this.emart;
+			disRate = 10 * 0.01;
+		} else if (name.equals("himart")) {
+			dataArr = this.himart;
+			disRate = 13 * 0.01;
+		} else if (name.equals("lottemart")) {
+			dataArr = this.lottemart;
+			disRate = 15 * 0.01;
+		} else
+			System.out.println("Error!");
+
+		for (int i = 0; i < dataArr.size(); i++) {
+			if (dataArr.get(i).phoneName.equals(gNote)) {
+				sum += (getEA(dataArr.get(i).phoneEA)) * (ic[0].phonePrice) * (1.00 - disRate);
+			} else if (dataArr.get(i).phoneName.equals(v30)) {
+				sum += (getEA(dataArr.get(i).phoneEA)) * (ic[1].phonePrice) * (1.00 - disRate);
+			} else if (dataArr.get(i).phoneName.equals(iPhone)) {
+				sum += (getEA(dataArr.get(i).phoneEA)) * (ic[2].phonePrice) * (1.00 - disRate);
+			}
+		}
+
+		System.out.println(name + "의 총 매출은 " + sum + "원 입니다.");
+	}
+
+	// 마트별 수정된 data array list
+	// public InfoClass(String n, String s, int e, int p){
+	/*
+	 * public ArrayList<InfoClass> getData(ArrayList<InfoClass> mart) {
+	 * ArrayList<InfoClass> dataArr = new ArrayList<InfoClass>();
+	 * 
+	 * for (int i = 0; i < mart.size(); i++) { dataArr.get(i).phoneName =
+	 * mart.get(i).phoneName; dataArr.get(i).storeName = mart.get(i).storeName;
+	 * dataArr.get(i).ea = getEA(mart.get(i).phoneEA);
+	 * 
+	 * for (int j = 0; j < ic.length; j++) { if
+	 * (dataArr.get(i).phoneName.equals(ic[j].phoneName)) {
+	 * dataArr.get(i).phonePrice = getPrice(ic[j].phonePrice); } } }
+	 * 
+	 * return dataArr; }
+	 */
+
+	/*
+	 * // 최종 data array list public ArrayList<InfoClass> resultData(String name)
+	 * {
+	 * 
+	 * ArrayList<InfoClass> mart = new ArrayList<InfoClass>();
+	 * ArrayList<InfoClass> resultArr = new ArrayList<InfoClass>();
+	 * 
+	 * if(name.equals("emart")){ mart = emart; System.out.println("이마트 : 할인율(" +
+	 * discount(name) + "%)"); } else if(name.equals("himart")){ mart = himart;
+	 * System.out.println("하이마트 : 할인율(" + discount(name) + "%)"); } else
+	 * if(name.equals("lottemart")){ mart = lottemart;
+	 * System.out.println("롯데마트 : 할인율(" + discount(name) + "%)"); } else
+	 * System.out.println("잘못 입력하셨습니다!");
+	 * 
+	 * resultArr.get(0).phoneName = gNote; resultArr.get(1).phoneName = v30;
+	 * resultArr.get(2).phoneName = iPhone;
+	 * 
+	 * 
+	 * return resultArr;
+	 * 
+	 * }
+	 */
+}
