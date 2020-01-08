@@ -1,0 +1,54 @@
+package com.wjh.static_ex;
+// import java.util.Scanner;
+
+public class PrintClass extends DataClass {
+	public PrintClass(){
+		
+	}
+	
+	// 기종별 판매가 출력
+	public void printPrice(){
+		System.out.println("기종별 판매가를 출력합니다\n\n------------------\n");
+		for(int i=0; i<ic.length; i++){
+			System.out.println(ic[i].phoneName + "\t" + ic[i].phonePrice);
+		}
+	}
+	
+	/*
+	// 마트별 종류별 지점별 판대매수 출력
+	public void printEA(String name){
+		
+		ArrayList<InfoClass> mart = new ArrayList<InfoClass>();
+		
+		if(name == "emart"){
+			mart = emart;
+			System.out.println("이마트 : 할인율(" + discount(name) + "%)");
+		}
+		else if(name == "himart"){
+			mart = himart;
+			System.out.println("하이마트 : 할인율(" + discount(name) + "%)");
+		}
+		else if(name == "lottemart"){
+			mart = lottemart;
+			System.out.println("롯데마트 : 할인율(" + discount(name) + "%)");
+		} else System.out.println("잘못 입력하셨습니다!");
+		
+		ArrayList<InfoClass> resultArr = new ArrayList<InfoClass>();
+		resultArr =	getData(mart);
+				
+		for(int i =0 ; i<mart.size(); i++){
+			System.out.println(gNote + "\t");	
+			System.out.println(mart.get(i).);
+			
+		}
+		
+	}
+	*/
+	
+	
+	// 마트별 총 매출 구하기
+
+	
+	// 마트별 총 매출 구하기
+	
+}
