@@ -1,15 +1,19 @@
+package com.wjh.static_ex;
+
 public class MainClass {
 
 	public static void main(String[] args) {
 
 		PrintClass pc = new PrintClass();
-		DataClass dc = new DataClass();
-		
+
 		pc.printPrice();
-		System.out.println("\n");
+		System.out.println("\n----------------\n");
+
+		pc.printEA();
+		System.out.println("\n----------------\n");
 		
-		dc.martsumEA();
-		dc.sumEA();
+		pc.martsumEA();
+		pc.sumEA();
 		
 		}
 }
