@@ -1,2 +1,2 @@
 # java_class
-국비교육 class JAVA
+JAVA 'extends', 'static' 활용
