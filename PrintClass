@@ -1,54 +1,137 @@
 package com.wjh.static_ex;
-// import java.util.Scanner;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PrintClass extends DataClass {
 	public PrintClass(){
-		
+
 	}
-	
+
 	// 기종별 판매가 출력
 	public void printPrice(){
-		System.out.println("기종별 판매가를 출력합니다\n\n------------------\n");
-		for(int i=0; i<ic.length; i++){
-			System.out.println(ic[i].phoneName + "\t" + ic[i].phonePrice);
+		System.out.println("----------------\n\n<기종별 정상가>\n");
+		for(int i=0; i<ic.size(); i++){
+			System.out.println(ic.get(i).phoneName + "\t" + ic.get(i).phonePrice);
 		}
 	}
-	
-	/*
-	// 마트별 종류별 지점별 판대매수 출력
-	public void printEA(String name){
-		
-		ArrayList<InfoClass> mart = new ArrayList<InfoClass>();
-		
-		if(name == "emart"){
-			mart = emart;
-			System.out.println("이마트 : 할인율(" + discount(name) + "%)");
-		}
-		else if(name == "himart"){
-			mart = himart;
-			System.out.println("하이마트 : 할인율(" + discount(name) + "%)");
-		}
-		else if(name == "lottemart"){
-			mart = lottemart;
-			System.out.println("롯데마트 : 할인율(" + discount(name) + "%)");
-		} else System.out.println("잘못 입력하셨습니다!");
-		
-		ArrayList<InfoClass> resultArr = new ArrayList<InfoClass>();
-		resultArr =	getData(mart);
-				
-		for(int i =0 ; i<mart.size(); i++){
-			System.out.println(gNote + "\t");	
-			System.out.println(mart.get(i).);
-			
-		}
-		
-	}
-	*/
-	
-	
-	// 마트별 총 매출 구하기
 
-	
-	// 마트별 총 매출 구하기
-	
+	// 마트별 기종별 매출 합
+	public void martsumEA() {
+		int sum[] = new int[3];
+
+		System.out.println("<Mart 내 기종별 판매대수 구하기>");
+		System.out.println("원하는 mart를 입력하세요");
+
+		Scanner x = new Scanner(System.in);
+		String name = x.nextLine();
+		System.out.println("");
+		String phoneName[] = { gNote, v30, iPhone };
+		ArrayList<InfoClass> dataArr = new ArrayList<InfoClass>();
+
+		if (name.equals("emart")) {
+			dataArr = this.emart;
+		} else if (name.equals("himart")) {
+			dataArr = this.himart;
+		} else if (name.equals("lottemart")) {
+			dataArr = this.lottemart;
+		} else
+			System.out.println("Error!");
+
+		disRate = discount(name);
+
+		for (int i = 0; i < dataArr.size(); i++) {
+			if (dataArr.get(i).phoneName.equals(gNote)) {
+				sum[0] += (getEA(dataArr.get(i).phoneEA)) * (ic.get(0).phonePrice) * (1.00 - disRate);
+			} else if (dataArr.get(i).phoneName.equals(v30)) {
+				sum[1] += (getEA(dataArr.get(i).phoneEA)) * (ic.get(1).phonePrice) * (1.00 - disRate);
+			} else if (dataArr.get(i).phoneName.equals(iPhone)) {
+				sum[2] += (getEA(dataArr.get(i).phoneEA)) * (ic.get(2).phonePrice) * (1.00 - disRate);
+			}
+		}
+
+		System.out.println(name + "에서 판매된 ");
+		for (int i = 0; i < 3; i++) {
+			System.out.println(phoneName[i] + "\t의 총 매출 : \t" + sum[i] + " 원.");
+		}
+		System.out.println("\n----------------");
+	}
+
+	// 그냥 마트별 매출 합 method
+	public void sumEA() {
+		int sum = 0;
+
+		System.out.println("\n<Mart의 총 매출 구하기>");
+		System.out.println("원하는 mart를 입력하세요");
+
+		Scanner x = new Scanner(System.in);
+		String name = x.nextLine();
+		System.out.println(" ");
+		ArrayList<InfoClass> dataArr = new ArrayList<InfoClass>();
+
+		if (name.equals("emart")) {
+			dataArr = this.emart;
+			disRate = 10 * 0.01;
+		} else if (name.equals("himart")) {
+			dataArr = this.himart;
+			disRate = 13 * 0.01;
+		} else if (name.equals("lottemart")) {
+			dataArr = this.lottemart;
+			disRate = 15 * 0.01;
+		} else
+			System.out.println("Error!");
+
+		for (int i = 0; i < dataArr.size(); i++) {
+			if (dataArr.get(i).phoneName.equals(gNote)) {
+				sum += (getEA(dataArr.get(i).phoneEA)) * (ic.get(0).phonePrice) * (1.00 - disRate);
+			} else if (dataArr.get(i).phoneName.equals(v30)) {
+				sum += (getEA(dataArr.get(i).phoneEA)) * (ic.get(1).phonePrice) * (1.00 - disRate);
+			} else if (dataArr.get(i).phoneName.equals(iPhone)) {
+				sum += (getEA(dataArr.get(i).phoneEA)) * (ic.get(2).phonePrice) * (1.00 - disRate);
+			}
+		}
+
+		System.out.println(name + "의 총 매출 :\t" + sum + "원.");
+		System.out.println("\n----------------");
+	}
+
+
+	// 마트별 종류별 지점별 판대매수 출력
+	public void printEA(){
+		System.out.println("<Mart별/기종별/지점별 총 판매대수 현황>\n\n원하는 mart를 입력하세요");
+
+		Scanner x = new Scanner(System.in);
+		String name = x.nextLine();
+		System.out.println(" ");
+
+		ArrayList<InfoClass> mart = new ArrayList<InfoClass>();
+		ArrayList<InfoClass> resultData = new ArrayList<InfoClass>();
+
+		if(name.equals("emart")){
+			mart = emart;
+			System.out.println("이마트 : 할인율(" + (discount(name)*100) + "%)\n");
+		}
+		else if(name.equals("himart")){
+			mart = himart;
+			System.out.println("하이마트 : 할인율(" + (discount(name)*100) + "%)\n");
+		}
+		else if(name.equals("lottemart")){
+			mart = lottemart;
+			System.out.println("롯데마트 : 할인율(" + (discount(name)*100) + "%)\n");
+		} else System.out.println("잘못 입력하셨습니다!");
+
+		System.out.print("<기종별/지점별 판매대수 현황>\n");
+		for(int j=0 ; j < ic.size() ; j++) {
+			System.out.print(ic.get(j).phoneName + " :\n");
+
+			for (int i = 0; i < mart.size(); i++) {
+				if (mart.get(i).phoneName.equals(ic.get(j).phoneName)) {
+					System.out.print(" " + mart.get(i).storeName + "  " + mart.get(i).phoneEA + "\t");
+				}
+				}
+			System.out.println(" ");
+		}
+
+	}
+
 }
